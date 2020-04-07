@@ -61,9 +61,5 @@ in
       keybindingsStr
       cfg.extraConfig
     ];
-
-    home.file.".xprofile".text = ''
-      "${pkgs.sxhkd}/bin/sxhkd &"
-    '';
   };
 }
