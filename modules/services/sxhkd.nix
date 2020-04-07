@@ -62,25 +62,8 @@ in
       cfg.extraConfig
     ];
 
-    systemd.user.services.sxhkd = {
-      Unit = {
-        Description = "simple X hotkey daemon";
-        After = [ "graphical-session-pre.target" ];
-        PartOf = [ "graphical-session.target" ];
-      };
-
-      Service = {
-        Environment =
-          "PATH="
-          + "${config.home.profileDirectory}/bin"
-          + optionalString (cfg.extraPath != "") ":"
-          + cfg.extraPath;
-        ExecStart = "${pkgs.sxhkd}/bin/sxhkd";
-      };
-
-      Install = {
-        WantedBy = [ "graphical-session.target" ];
-      };
-    };
+    home.file.".xprofile".text = ''
+      "${pkgs.sxhkd}/bin/sxhkd &"
+    '';
   };
 }
