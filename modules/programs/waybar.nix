@@ -29,7 +29,7 @@ let
   ];
 
   isValidCustomModuleName = x:
-    elem x defaultModuleNames || (hasPrefix "custom/" x && stringLength x > 7);
+    elem x defaultModuleNames || (elem (head (splitString "#" x)) defaultModuleNames) || (hasPrefix "custom/" x && stringLength x > 7);
 
   margins = let
     mkMargin = name: {
